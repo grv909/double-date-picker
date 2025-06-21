@@ -1,2 +1,8 @@
-<p>date-picker works!</p>
-<button (click)="checkConsole()" >Check</button>
+<button (click)="checkConsole()">Check</button>
+<div class="cal-picker">
+  <div class="cal-view" *ngFor="let month of months(); let idx = index">
+    <div class="days" *ngFor="let day of month.days">
+      {{ day.date.getDate() }}
+    </div>
+  </div>
+</div>
