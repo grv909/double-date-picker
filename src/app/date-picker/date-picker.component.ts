@@ -4,13 +4,15 @@ import { Component, computed, signal } from '@angular/core';
 @Component({
   selector: 'app-date-picker',
   standalone: true,
-  imports: [NgFor, JsonPipe],
+  imports: [NgFor],
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.scss',
 })
 export class DatePickerComponent {
   // returns todays date -> Sun Jun 15 2025 18:15:44 GMT+0530 (India Standard Time)
   today = new Date();
+  startDate = signal<Date | null>(null);
+  endDate = signal<Date | null>(null);
 
   baseMonth = signal([
     new Date(
@@ -70,6 +72,42 @@ export class DatePickerComponent {
       monthLabel: `${monthName} ${tempYear}`,
       days,
     };
+  }
+
+  selectedDate(date: Date, idx: number) {
+    console.log('Calendar No.', idx);
+
+    if (this.startDate() && this.endDate()) {
+      this.startDate.set(date);
+      this.endDate.set(null);
+    } else if (this.startDate()) {
+      const tempDate = this.startDate();
+      if (this.startDate()! > date) {
+        this.startDate.set(date);
+        this.endDate.set(tempDate);
+      } else {
+        this.endDate.set(date);
+      }
+    } else {
+      this.startDate.set(date);
+    }
+
+    console.log('selected start date', this.startDate());
+    console.log('selected End Date', this.endDate());
+  }
+
+  isSelected(date: Date) {
+    if (date == this.startDate() || date === this.endDate()) {
+      return true;
+    }
+    return false;
+  }
+
+  inRange(date: Date) {
+    if (date > this.startDate()! && date < this.endDate()!) {
+      return true;
+    }
+    return false;
   }
   checkConsole() {
     console.log(this.generateCalendar(this.today));
