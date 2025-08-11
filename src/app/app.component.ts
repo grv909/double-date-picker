@@ -5,9 +5,9 @@ import { DatePickerComponent } from './date-picker/date-picker.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,DatePickerComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Date Picker';

@@ -2,7 +2,15 @@
 <div class="cal-picker">
   <div class="dual-months">
     <div *ngFor="let month of months(); let idx = index">
-      <div>Buttons , dropdowns</div>
+      <div>
+        <button><-</button>
+        <select name="Month" id="Month">
+          <option value="Jan">January</option>
+        </select>
+        <select name="Year" id="Year">
+          <option value="2022">2022</option>
+        </select>
+      </div>
       <div class="cal-view brdr-btm">
         <div
           class="weekday"
