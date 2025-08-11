@@ -1,0 +1,46 @@
+<button (click)="checkConsole()">Check</button>
+<div class="cal-picker">
+  <div class="dual-months">
+    <div *ngFor="let month of months(); let idx = index">
+      <div>
+        <button><-</button>
+        <select name="Month" id="Month">
+          <option value="Jan">January</option>
+        </select>
+        <select name="Year" id="Year">
+          <option value="2022">2022</option>
+        </select>
+      </div>
+      <div class="cal-view brdr-btm">
+        <div
+          class="weekday"
+          *ngFor="
+            let weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Frid', 'Satu']
+          "
+        >
+          {{ weekday }}
+        </div>
+      </div>
+      <div class="cal-view">
+        <div
+          class="days"
+          (click)="selectedDate(day.date, idx)"
+          [class.selected]="isSelected(day.date)"
+          [class.inRange]="inRange(day.date)"
+          [style.gridColumnStart]="day.offset"
+          *ngFor="let day of month.days"
+        >
+          {{ day.date.getDate() }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn">
+    <div class="separate-line"></div>
+    <div class="btn-grps">
+      <button>Reset</button>
+      <button>Done</button>
+    </div>
+  </div>
+</div>
